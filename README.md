@@ -1,6 +1,11 @@
 # proof-gate
 
 [![test](https://github.com/cangurel81/proof-gate/actions/workflows/test.yml/badge.svg)](https://github.com/cangurel81/proof-gate/actions/workflows/test.yml)
+[![Release](https://img.shields.io/github/v/release/cangurel81/proof-gate?sort=semver)](https://github.com/cangurel81/proof-gate/releases)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Python 3.8+](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://www.python.org/downloads/)
+[![Tests: 38 passed](https://img.shields.io/badge/tests-38%20passed-brightgreen.svg)](#tests)
+![CI platforms: Windows, Linux](https://img.shields.io/badge/CI%20platforms-Windows%20%7C%20Linux-lightgrey.svg)
 
 Back a completion claim with portable evidence: the command, its exit code, a
 redacted output excerpt, a UTC timestamp, and SHA-256 hashes of the files the
@@ -16,19 +21,17 @@ done*. It does not leave an artifact that the next session or a reviewer can
 check. A proof record does. Its freshness check is machine-decidable, which is
 the difference between a checklist and a gate.
 
-## Download
-
-[proof-gate.zip](https://github.com/cangurel81/proof-gate/releases/latest/download/proof-gate.zip) — source archive, no dependencies.
-
 ## Install
 
-No dependencies:
+No dependencies, Python 3.8+. Clone the repo and run:
 
 ```sh
+git clone https://github.com/cangurel81/proof-gate.git
+cd proof-gate
 python scripts/proof-gate.py record <id> --run "<command>" --watch "src/**/*.py"
 ```
 
-Or as a module:
+GitHub's **Code → Download ZIP** works too. Or run as a module:
 
 ```sh
 python -m proof_gate verify <id>
@@ -38,10 +41,10 @@ python -m proof_gate verify <id>
 
 ```sh
 # Run a command, capture output, hash the files it concerns
-python scripts/proof-gate.py record tests-31 \
+python scripts/proof-gate.py record tests-38 \
   --run "python -m unittest discover -s test" \
   --watch "test/**/*.py" --watch "src/**/*.py" \
-  --claim "All 31 unit tests pass"
+  --claim "All 38 unit tests pass"
 
 # Already ran it? Import the captured output instead of rerunning
 python scripts/proof-gate.py record build-ok \
@@ -49,7 +52,7 @@ python scripts/proof-gate.py record build-ok \
   --output-file build.log --watch "pyproject.toml" --claim "Package builds"
 
 # Check freshness now (0 = fresh, 1 = stale/missing, 2 = bad input)
-python scripts/proof-gate.py verify tests-31 --json
+python scripts/proof-gate.py verify tests-38 --json
 
 # Find claims in docs with no proof marker
 python scripts/proof-gate.py scan . --fail-on any --require-fresh
@@ -65,7 +68,7 @@ In Markdown or text, a claim is considered proven when the same line or the
 next two lines carry `proof:<id>` and that record exists:
 
 ```md
-All 31 unit tests pass proof:tests-31
+All 38 unit tests pass proof:tests-38
 ```
 
 `scan` reports:

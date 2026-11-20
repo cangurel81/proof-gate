@@ -25,7 +25,7 @@ Standard library only, Python 3.8+, no network, no git dependency, MIT licensed.
 
 ## When to use
 
-- Before saying "bitti", "fixed", "tests pass", "verified" or "done".
+- Before saying "done", "fixed", "tests pass", "verified" or "ship it".
 - After a test, build, lint or migration run that will be cited in a report.
 - When a reviewer asks "did you actually run it?" and output must be shown.
 - When a claim lives in a README, report or handoff and should not rot silently.
@@ -62,7 +62,7 @@ In Markdown or text, a claim counts as proven when the same line or the next two
 lines carry `proof:<id>` and that record exists:
 
 ```md
-All 31 unit tests pass proof:tests-31
+All 38 unit tests pass proof:tests-38
 ```
 
 `scan` findings:
