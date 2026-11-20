@@ -27,7 +27,9 @@ def tmpdir(prefix):
 
 def write_text(path, text):
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(text, encoding="utf-8", newline="\n")
+    # Path.write_text(newline=...) needs Python 3.10; CI also runs 3.9.
+    with path.open("w", encoding="utf-8", newline="\n") as handle:
+        handle.write(text)
     return path
 
 
